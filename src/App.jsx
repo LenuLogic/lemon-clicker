@@ -1,4 +1,5 @@
-import './App.css'
+import './App.css';
+import Lemon from './components/Lemon';
 
 function App() {
 
