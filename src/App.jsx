@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <div>
-        TODO Lemon Clicker
+        <Lemon />
       </div>  
     </>
   )
