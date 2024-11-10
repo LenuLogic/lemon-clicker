@@ -6,8 +6,8 @@ function Credits(props) {
             <Header balance={props.stats.balance}>credits</Header>
             <div className="scrollbox">
                 <div className="credits">
-                    <h2>credits</h2>
-                    <p>LenuLogic</p>
+                    <h2>lemon clicker</h2>
+                    <h3>made by LenuLogic</h3>
                 </div>
             </div>
         </div>
