@@ -26,7 +26,10 @@ function App() {
       let newstats = {...stats}; // tekee kopion tilamuuttujasta
       newstoreitems[index].qty++;
       newstats.balance = newstats.balance - newstoreitems[index].price;
-      // TO DO: Uusi tuotehinta
+      // Lasketaan uusi tuotteen hinta
+      newstoreitems[index].price =
+        Math.floor(newstoreitems[index].baseprice * Math.pow(1.15,newstoreitems[index].qty));
+      // TO DO: lasketaan uusi kasvatusarvo
       setStoreitems(newstoreitems); // tallentaa tilamuuttujalle uuden arvon
       setStats(newstats); // sama kuin yllä
     }
