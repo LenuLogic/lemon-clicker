@@ -1,5 +1,6 @@
 import AppRouter from './components/AppRouter';
 import items from './config/items.js';
+import round from './utils/round';
 import './App.css';
 import { useState } from 'react';
 
@@ -14,7 +15,7 @@ function App() {
     // Kasvatetaan napautusten lukumäärää yhdellä.
     newstats.clicks = newstats.clicks + 1;
     //Kasvatetaan sitruunoiden määrää kasvatusarvolla.
-    newstats.balance = newstats.balance + newstats.increase;
+    newstats.balance = round(newstats.balance + newstats.increase,1);
     // Tallennetaan päivitetty stats-muuttuja.
     setStats(newstats); 
     }
@@ -25,11 +26,22 @@ function App() {
       let newstoreitems = [...storeitems]; // tekee kopion tilamuuttujasta
       let newstats = {...stats}; // tekee kopion tilamuuttujasta
       newstoreitems[index].qty++;
-      newstats.balance = newstats.balance - newstoreitems[index].price;
+      newstats.balance = round(newstats.balance - newstoreitems[index].price,1);
       // Lasketaan uusi tuotteen hinta
       newstoreitems[index].price =
         Math.floor(newstoreitems[index].baseprice * Math.pow(1.15,newstoreitems[index].qty));
-      // TO DO: lasketaan uusi kasvatusarvo
+      
+      // lasketaan uusi kasvatusarvo
+      let increase = 1;
+      let upgrades = 0;
+      for (let i=0; i<storeitems.length; i++) {
+        upgrades = upgrades + storeitems[i].qty;
+        increase = increase + storeitems[i].multiplier*storeitems[i].qty;
+      }
+      newstats.increase = increase;
+      newstats.upgrades = upgrades;
+      // uusi osio loppuu
+      
       setStoreitems(newstoreitems); // tallentaa tilamuuttujalle uuden arvon
       setStats(newstats); // sama kuin yllä
     }
