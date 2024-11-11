@@ -1,3 +1,5 @@
+import shortenNumber from '../utils/shortenNumber';
+
 function Booster(props) {
     // kokeile toteuttaa Booster-niminen komponentti, 
     // joka saa kutsun yhteydessä value-määritteellä arvon.
@@ -5,7 +7,7 @@ function Booster(props) {
 
     return (
         <div className="booster">
-            {value} lemon / click
+            {shortenNumber(value)} lemon / click
         </div>
     );
 }
