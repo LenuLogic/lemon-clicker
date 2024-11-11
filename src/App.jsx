@@ -19,10 +19,24 @@ function App() {
     setStats(newstats); 
     }
 
+  const handlePurchase = (id) => {
+    const index = storeitems.findIndex(storeitem => storeitem.id == id); // etsii tunnistetta vastaavan tuotteen indeksin taulukosta.
+    if (stats.balance >= storeitems[index].price) {
+      let newstoreitems = [...storeitems]; // tekee kopion tilamuuttujasta
+      let newstats = {...stats}; // tekee kopion tilamuuttujasta
+      newstoreitems[index].qty++;
+      newstats.balance = newstats.balance - newstoreitems[index].price;
+      // TO DO: Uusi tuotehinta
+      setStoreitems(newstoreitems); // tallentaa tilamuuttujalle uuden arvon
+      setStats(newstats); // sama kuin yllä
+    }
+  }
+
   return (
     <AppRouter stats={stats} 
     storeitems={storeitems}
-    handleClick={handleClick} />
+    handleClick={handleClick} 
+    handlePurchase={handlePurchase}/>
   )
 }
 

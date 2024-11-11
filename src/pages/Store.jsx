@@ -2,7 +2,9 @@ import Header from '../components/Header';
 import Item from '../components/Item';
 
 function Store(props) {
-    const items = props.storeitems.map(item => <Item key={item.id} item={item} />);
+    const items = props.storeitems.map(item => ( 
+        <Item key={item.id} item={item} handlePurchase={props.handlePurchase} />
+        ));
     return (
         <div className="container">
             <Header balance={props.stats.balance}>store</Header>
