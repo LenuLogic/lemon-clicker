@@ -1,4 +1,5 @@
 import AppRouter from './components/AppRouter';
+import getPurchasableItems from './utils/getPurchasableItems.js';
 import items from './config/items.js';
 import round from './utils/round';
 import './App.css';
@@ -9,6 +10,7 @@ function App() {
   const [storeitems,setStoreitems] = useState(items);
   const [stats, setStats] = useState({clicks: 0, balance: 0, 
                             increase: 1, itemstobuy: 0});
+  
   const handleClick = () => {
     // Tehdään kopio stats-tilamuuttujasta.
     let newstats = {...stats}
@@ -16,6 +18,7 @@ function App() {
     newstats.clicks = newstats.clicks + 1;
     //Kasvatetaan sitruunoiden määrää kasvatusarvolla.
     newstats.balance = round(newstats.balance + newstats.increase,1);
+    newstats.itemstobuy = countBuyableItems(storeitems,newstats.balance);
     // Tallennetaan päivitetty stats-muuttuja.
     setStats(newstats); 
     }
@@ -42,9 +45,19 @@ function App() {
       newstats.upgrades = upgrades;
       // uusi osio loppuu
       
+      newstats.itemstobuy = countBuyableItems(newstoreitems,newstats.balance);
+
       setStoreitems(newstoreitems); // tallentaa tilamuuttujalle uuden arvon
       setStats(newstats); // sama kuin yllä
     }
+  }
+
+  const countBuyableItems = (items, balance) => {
+    let total = 0;
+    getPurchasableItems(items).forEach(item => {
+      if (item.price <= balance) total++;
+    });
+    return total;
   }
 
   return (
