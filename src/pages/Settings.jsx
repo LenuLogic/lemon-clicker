@@ -1,4 +1,5 @@
 import Header from '../components/Header';
+import Reset from '../components/Reset';
 import Stat from '../components/Stat';
 
 function Settings(props) {
@@ -16,7 +17,7 @@ function Settings(props) {
                         <Stat title="upgrades" value={props.stats.upgrades} />
                     </div>
                 </div>
-                TO DO: reset
+                <Reset />
             </div>
         </div>
     );
