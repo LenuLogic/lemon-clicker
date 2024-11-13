@@ -8,8 +8,15 @@ import { useState } from 'react';
 
 function App() {
   const [storeitems,setStoreitems] = useState(items);
-  const [stats, setStats] = useState({clicks: 0, balance: 0, 
-                            increase: 1, itemstobuy: 0});
+  const initialstats = {
+    clicks: 0,
+    balance: 0,
+    increase: 1,
+    itemstobuy: 0,
+    upgrades: 0,
+    collected: 0
+  }
+  const [stats, setStats] = useState(initialstats);
   
   const handleClick = () => {
     // Tehdään kopio stats-tilamuuttujasta.
@@ -20,6 +27,7 @@ function App() {
     newstats.balance = round(newstats.balance + newstats.increase,1);
     newstats.itemstobuy = countBuyableItems(storeitems,newstats.balance);
     // Tallennetaan päivitetty stats-muuttuja.
+    newstats.collected = round(newstats.collected + newstats.increase,1);
     setStats(newstats); 
     }
 
