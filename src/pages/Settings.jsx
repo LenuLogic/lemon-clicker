@@ -17,7 +17,8 @@ function Settings(props) {
                         <Stat title="upgrades" value={props.stats.upgrades} />
                     </div>
                 </div>
-                <Reset />
+                <Reset resetvalue={props.stats.clicks} 
+                        handleReset={props.handleReset} />
             </div>
         </div>
     );

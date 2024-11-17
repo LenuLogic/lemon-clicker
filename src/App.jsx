@@ -34,7 +34,7 @@ function App() {
   const handlePurchase = (id) => {
     const index = storeitems.findIndex(storeitem => storeitem.id == id); // etsii tunnistetta vastaavan tuotteen indeksin taulukosta.
     if (stats.balance >= storeitems[index].price) {
-      let newstoreitems = [...storeitems]; // tekee kopion tilamuuttujasta
+      let newstoreitems = JSON.parse(JSON.stringify(storeitems)); // tekee kopion tilamuuttujasta
       let newstats = {...stats}; // tekee kopion tilamuuttujasta
       newstoreitems[index].qty++;
       newstats.balance = round(newstats.balance - newstoreitems[index].price,1);
@@ -68,11 +68,17 @@ function App() {
     return total;
   }
 
+  const handleReset = () => {
+    setStats(initialstats);
+    setStoreitems(items);
+  }
+
   return (
     <AppRouter stats={stats} 
     storeitems={storeitems}
     handleClick={handleClick} 
-    handlePurchase={handlePurchase}/>
+    handlePurchase={handlePurchase} 
+    handleReset={handleReset} />
   )
 }
 
